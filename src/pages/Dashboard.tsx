@@ -1,37 +1,41 @@
+import { useState } from "react";
 import {
   Send,
   CheckCircle,
   AlertTriangle,
-  Clock,
-  Users,
-  DollarSign,
+  MessageSquare,
+  Radio,
 } from "lucide-react";
 import KPICard from "@/components/dashboard/KPICard";
-import DeliveryChart from "@/components/dashboard/DeliveryChart";
-import RecentActivity from "@/components/dashboard/RecentActivity";
-import OperatorStatus from "@/components/dashboard/OperatorStatus";
-import QuickActions from "@/components/dashboard/QuickActions";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import MessageVolumeChart from "@/components/dashboard/MessageVolumeChart";
+import DeliveryStatusChart from "@/components/dashboard/DeliveryStatusChart";
+import OperatorPerformanceTable from "@/components/dashboard/OperatorPerformanceTable";
+import RoutingHealth from "@/components/dashboard/RoutingHealth";
+import IncomingMessages from "@/components/dashboard/IncomingMessages";
+import CostUtilization from "@/components/dashboard/CostUtilization";
+import SystemHealth from "@/components/dashboard/SystemHealth";
+import AIModeration from "@/components/dashboard/AIModeration";
+import UserActivity from "@/components/dashboard/UserActivity";
+import QuickActionsGrid from "@/components/dashboard/QuickActionsGrid";
+import ComplianceStatus from "@/components/dashboard/ComplianceStatus";
 
 const Dashboard = () => {
+  const [lastUpdated, setLastUpdated] = useState(new Date());
+
+  const handleRefresh = () => {
+    setLastUpdated(new Date());
+  };
+
   return (
     <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">
-            Overview of your SMS platform performance
-          </p>
-        </div>
-        <div className="text-sm text-muted-foreground">
-          Last updated: {new Date().toLocaleTimeString("en-ET")}
-        </div>
-      </div>
+      {/* Section 1: Header Summary Area */}
+      <DashboardHeader lastUpdated={lastUpdated} onRefresh={handleRefresh} />
 
-      {/* KPI Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+      {/* Section 2: KPI Summary Cards (Row 1) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         <KPICard
-          title="Messages Sent"
+          title="Total Messages Sent"
           value="182,450"
           subtitle="Today"
           icon={Send}
@@ -39,60 +43,74 @@ const Dashboard = () => {
           trend={{ value: 12.5, isPositive: true }}
         />
         <KPICard
-          title="Delivered"
+          title="Successfully Delivered"
           value="178,230"
-          subtitle="97.7% rate"
+          subtitle="97.7% success rate"
           icon={CheckCircle}
           variant="success"
           trend={{ value: 2.3, isPositive: true }}
         />
         <KPICard
-          title="Failed"
+          title="Failed Messages"
           value="4,220"
-          subtitle="2.3% rate"
+          subtitle="Network timeout"
           icon={AlertTriangle}
           variant="danger"
           trend={{ value: 0.5, isPositive: false }}
         />
         <KPICard
-          title="Pending"
-          value="12,500"
-          subtitle="In queue"
-          icon={Clock}
+          title="Incoming Messages"
+          value="1,420"
+          subtitle="47 new/unread"
+          icon={MessageSquare}
           variant="warning"
-        />
-        <KPICard
-          title="Active Contacts"
-          value="245,890"
-          subtitle="Farmers registered"
-          icon={Users}
-          variant="primary"
           trend={{ value: 8.2, isPositive: true }}
         />
         <KPICard
-          title="Monthly Cost"
-          value="ETB 125K"
-          subtitle="Jan 2026"
-          icon={DollarSign}
+          title="Active Sender IDs"
+          value="6"
+          subtitle="Approved & active"
+          icon={Radio}
           variant="primary"
         />
       </div>
 
-      {/* Charts and Activity */}
+      {/* Section 3: Messaging Performance Analytics (Row 2) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
-          <DeliveryChart />
+          <MessageVolumeChart />
         </div>
         <div>
-          <QuickActions />
+          <DeliveryStatusChart />
         </div>
       </div>
 
-      {/* Operator Status and Recent Activity */}
+      {/* Section 4: Operator & Routing Performance (Row 3) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <OperatorStatus />
-        <RecentActivity />
+        <OperatorPerformanceTable />
+        <RoutingHealth />
       </div>
+
+      {/* Section 5: Incoming Messages & Cost Utilization (Row 4) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <IncomingMessages />
+        <CostUtilization />
+      </div>
+
+      {/* Section 6: System Health & AI Moderation (Row 5) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <SystemHealth />
+        <AIModeration />
+      </div>
+
+      {/* Section 7: User Activity & Compliance (Row 6) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <UserActivity />
+        <ComplianceStatus />
+      </div>
+
+      {/* Section 8: Quick Action Shortcuts (Bottom) */}
+      <QuickActionsGrid />
     </div>
   );
 };
