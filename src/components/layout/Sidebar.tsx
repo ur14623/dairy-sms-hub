@@ -53,10 +53,9 @@ const navItems: NavItem[] = [
     title: "Messaging",
     icon: MessageSquare,
     children: [
-      { title: "Send SMS", icon: Send, path: "/messaging/send" },
-      { title: "Bulk SMS", icon: FileStack, path: "/messaging/bulk" },
+      { title: "Create SMS", icon: Send, path: "/messaging/create" },
+      { title: "Triggered SMS", icon: FileStack, path: "/messaging/triggered-sms" },
       { title: "Scheduled SMS", icon: Clock, path: "/messaging/scheduled" },
-      { title: "Triggered SMS", icon: Send, path: "/messaging/triggered" },
       { title: "Inbox (Replies)", icon: Inbox, path: "/messaging/inbox" },
     ],
   },
