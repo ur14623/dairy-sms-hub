@@ -9,6 +9,7 @@ import TriggeredSMSList from "./pages/TriggeredSMSList";
 import TriggeredSMSDetail from "./pages/TriggeredSMSDetail";
 import InboxList from "./pages/InboxList";
 import InboxDetail from "./pages/InboxDetail";
+import CreateSMS from "./pages/CreateSMS";
 
 const queryClient = new QueryClient();
 
@@ -20,8 +21,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/messaging/triggered" element={<TriggeredSMSList />} />
-          <Route path="/messaging/triggered/:id" element={<TriggeredSMSDetail />} />
+          <Route path="/messaging/create" element={<CreateSMS />} />
+          <Route path="/messaging/triggered-sms" element={<TriggeredSMSList />} />
+          <Route path="/messaging/triggered-sms/:id" element={<TriggeredSMSDetail />} />
           <Route path="/messaging/inbox" element={<InboxList />} />
           <Route path="/messaging/inbox/:id" element={<InboxDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
