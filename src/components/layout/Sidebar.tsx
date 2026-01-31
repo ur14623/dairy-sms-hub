@@ -63,8 +63,9 @@ const navItems: NavItem[] = [
     title: "Contacts",
     icon: BookUser,
     children: [
-      { title: "Contact List", icon: Users, path: "/contacts/list" },
-      { title: "Groups & Segments", icon: Users, path: "/contacts/groups" },
+      { title: "Contact Lists", icon: Users, path: "/contacts/lists" },
+      { title: "Groups", icon: Users, path: "/contacts/groups" },
+      { title: "Segments", icon: Users, path: "/contacts/segments" },
       { title: "Blacklist", icon: Ban, path: "/contacts/blacklist" },
     ],
   },
